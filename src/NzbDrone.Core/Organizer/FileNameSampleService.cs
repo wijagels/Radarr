@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NzbDrone.Core.MediaFiles;
 using NzbDrone.Core.MediaFiles.MediaInfo;
 using NzbDrone.Core.Movies;
@@ -24,30 +25,30 @@ namespace NzbDrone.Core.Organizer
 
             var mediaInfo = new MediaInfoModel()
             {
-                VideoFormat = "AVC",
-                VideoBitDepth = 10,
-                VideoMultiViewCount = 2,
-                VideoColourPrimaries = "BT.2020",
-                VideoTransferCharacteristics = "HLG",
-                AudioFormat = "DTS",
-                AudioChannels = 6,
-                AudioChannelPositions = "3/2/0.1",
-                AudioLanguages = "English",
-                Subtitles = "English/German"
-            };
+                VideoStreams = new List<VideoInfoModel>
+                {
+                    new VideoInfoModel
+                    {
+                        VideoFormat = "AVC",
+                        VideoBitDepth = 10,
+                        VideoMultiViewCount = 2,
+                        VideoColourPrimaries = "BT.2020",
+                        VideoTransferCharacteristics = "HLG",
+                    }
+                },
 
-            var mediaInfoAnime = new MediaInfoModel()
-            {
-                VideoFormat = "AVC",
-                VideoBitDepth = 10,
-                VideoMultiViewCount = 2,
-                VideoColourPrimaries = "BT.2020",
-                VideoTransferCharacteristics = "HLG",
-                AudioFormat = "DTS",
-                AudioChannels = 6,
-                AudioChannelPositions = "3/2/0.1",
-                AudioLanguages = "Japanese",
-                Subtitles = "Japanese/English"
+                AudioStreams = new List<AudioInfoModel>
+                {
+                    new AudioInfoModel
+                    {
+                        AudioFormat = "DTS",
+                        AudioChannels = 6,
+                        AudioChannelPositions = "3/2/0.1",
+                        Language = "English",
+                    }
+                },
+
+                Subtitles = "English/German"
             };
 
             _movieFile = new MovieFile
