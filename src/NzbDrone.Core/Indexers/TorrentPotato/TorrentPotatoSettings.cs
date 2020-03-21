@@ -26,6 +26,7 @@ namespace NzbDrone.Core.Indexers.TorrentPotato
             MinimumSeeders = IndexerDefaults.MINIMUM_SEEDERS;
             MultiLanguages = new List<int>();
             RequiredFlags = new List<int>();
+            IgnoredFlags = new List<int>();
         }
 
         [FieldDefinition(0, Label = "API URL", HelpText = "URL to TorrentPotato api.")]
@@ -48,6 +49,9 @@ namespace NzbDrone.Core.Indexers.TorrentPotato
 
         [FieldDefinition(6, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Required Flags", HelpText = "What indexer flags are required?", Advanced = true)]
         public IEnumerable<int> RequiredFlags { get; set; }
+
+        [FieldDefinition(7, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Ignored Flags", HelpText = "What indexer flags should be ignored?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags", Advanced = true)]
+        public IEnumerable<int> IgnoredFlags { get; set; }
 
         public NzbDroneValidationResult Validate()
         {

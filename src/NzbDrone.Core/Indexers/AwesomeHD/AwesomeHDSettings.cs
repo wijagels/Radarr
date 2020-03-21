@@ -27,6 +27,7 @@ namespace NzbDrone.Core.Indexers.AwesomeHD
             MinimumSeeders = 0;
             MultiLanguages = new List<int>();
             RequiredFlags = new List<int>();
+            IgnoredFlags = new List<int>();
         }
 
         [FieldDefinition(0, Label = "API URL", Advanced = true, HelpText = "Do not change this unless you know what you're doing. Since you Passkey will be sent to that host.")]
@@ -44,7 +45,10 @@ namespace NzbDrone.Core.Indexers.AwesomeHD
         [FieldDefinition(4, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Required Flags", HelpText = "What indexer flags are required?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags#1-required-flags", Advanced = true)]
         public IEnumerable<int> RequiredFlags { get; set; }
 
-        [FieldDefinition(5)]
+        [FieldDefinition(5, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Ignored Flags", HelpText = "What indexer flags should be ignored?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags", Advanced = true)]
+        public IEnumerable<int> IgnoredFlags { get; set; }
+
+        [FieldDefinition(6)]
         public SeedCriteriaSettings SeedCriteria { get; set; } = new SeedCriteriaSettings();
 
         public NzbDroneValidationResult Validate()

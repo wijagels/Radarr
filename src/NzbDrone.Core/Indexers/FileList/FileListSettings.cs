@@ -30,6 +30,7 @@ namespace NzbDrone.Core.Indexers.FileList
             Categories = new int[] { (int)FileListCategories.Movie_HD, (int)FileListCategories.Movie_SD, (int)FileListCategories.Movie_4K };
             MultiLanguages = new List<int>();
             RequiredFlags = new List<int>();
+            IgnoredFlags = new List<int>();
         }
 
         [FieldDefinition(0, Label = "Username")]
@@ -53,7 +54,10 @@ namespace NzbDrone.Core.Indexers.FileList
         [FieldDefinition(6, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Required Flags", HelpText = "What indexer flags are required?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags#1-required-flags", Advanced = true)]
         public IEnumerable<int> RequiredFlags { get; set; }
 
-        [FieldDefinition(7)]
+        [FieldDefinition(7, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Ignored Flags", HelpText = "What indexer flags should be ignored?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags", Advanced = true)]
+        public IEnumerable<int> IgnoredFlags { get; set; }
+
+        [FieldDefinition(8)]
         public SeedCriteriaSettings SeedCriteria { get; set; } = new SeedCriteriaSettings();
 
         public NzbDroneValidationResult Validate()

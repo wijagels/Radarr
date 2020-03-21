@@ -27,6 +27,7 @@ namespace NzbDrone.Core.Indexers.TorrentRss
             MinimumSeeders = IndexerDefaults.MINIMUM_SEEDERS;
             MultiLanguages = new List<int>();
             RequiredFlags = new List<int>();
+            IgnoredFlags = new List<int>();
         }
 
         [FieldDefinition(0, Label = "Full RSS Feed URL")]
@@ -49,6 +50,9 @@ namespace NzbDrone.Core.Indexers.TorrentRss
 
         [FieldDefinition(6, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Required Flags", HelpText = "What indexer flags are required?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags#1-required-flags", Advanced = true)]
         public IEnumerable<int> RequiredFlags { get; set; }
+
+        [FieldDefinition(7, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Ignored Flags", HelpText = "What indexer flags should be ignored?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags", Advanced = true)]
+        public IEnumerable<int> IgnoredFlags { get; set; }
 
         public NzbDroneValidationResult Validate()
         {

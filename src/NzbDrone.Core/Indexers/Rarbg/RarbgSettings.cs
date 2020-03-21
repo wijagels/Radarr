@@ -30,6 +30,7 @@ namespace NzbDrone.Core.Indexers.Rarbg
             Categories = new[] { 14, 48, 17, 44, 45, 47, 50, 51, 52, 42, 46 };
             MultiLanguages = new List<int>();
             RequiredFlags = new List<int>();
+            IgnoredFlags = new List<int>();
         }
 
         [FieldDefinition(0, Label = "API URL", HelpText = "URL to Rarbg api, not the website.")]
@@ -50,7 +51,10 @@ namespace NzbDrone.Core.Indexers.Rarbg
         [FieldDefinition(5, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Required Flags", HelpText = "What indexer flags are required?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags#1-required-flags", Advanced = true)]
         public IEnumerable<int> RequiredFlags { get; set; }
 
-        [FieldDefinition(6, Type = FieldType.Textbox, Label = "Categories", HelpText = "Comma Separated list, you can retrieve the ID by checking the URL behind the category on the website (i.e. Movie/x264/1080 = 44)", HelpLink = "https://rarbgmirror.org/torrents.php?category=movies", Advanced = true)]
+        [FieldDefinition(6, Type = FieldType.TagSelect, SelectOptions = typeof(IndexerFlags), Label = "Ignored Flags", HelpText = "What indexer flags should be ignored?", HelpLink = "https://github.com/Radarr/Radarr/wiki/Indexer-Flags", Advanced = true)]
+        public IEnumerable<int> IgnoredFlags { get; set; }
+
+        [FieldDefinition(7, Type = FieldType.Textbox, Label = "Categories", HelpText = "Comma Separated list, you can retrieve the ID by checking the URL behind the category on the website (i.e. Movie/x264/1080 = 44)", HelpLink = "https://rarbgmirror.org/torrents.php?category=movies", Advanced = true)]
         public IEnumerable<int> Categories { get; set; }
 
         [FieldDefinition(7)]

@@ -44,6 +44,18 @@ namespace NzbDrone.Core.DecisionEngine.Specifications
             {
                 var requiredFlags = torrentIndexerSettings.RequiredFlags;
                 var requiredFlag = (IndexerFlags)0;
+                var ignoredFlags = torrentIndexerSettings.IgnoredFlags;
+
+                if (ignoredFlags != null)
+                {
+                    foreach (var flag in ignoredFlags)
+                    {
+                        if (torrentInfo.IndexerFlags.HasFlag((IndexerFlags)flag))
+                        {
+                            return Decision.Reject("Found ignored flag: {0}", (IndexerFlags)flag);
+                        }
+                    }
+                }
 
                 if (requiredFlags == null || !requiredFlags.Any())
                 {
